@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- preconnect ke google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- font icon material symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="icon" href="https://i.ibb.co.com/nNfMqxM2/Untitled350-20260828110618.png">
+    <!-- css khusus halaman receiver -->
+    <link rel="stylesheet" href="../css/receiver.css">
+    <title>Kartu Ucapan - Bloomz Gift</title>
+</head>
+
+<body>
+    <main>
+        <!-- elemen hiasan kartu, kemungkinan buat animasi css -->
+        <section id="card-hias">
+            <div class="card satu"></div>
+            <div class="card dua"></div>
+        </section>
+
+        <h1>Yeay! Kamu mendapat buket</h1>
+        <!-- kartu bisa dibalik, depan buat preview, belakang buat pesan -->
+        <section class="flip-card" id="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <!-- gambar buket biasa, kepake kalau bukan buket rakitan -->
+                    <span class="petunjuk-klik">Ketuk untuk melihat pesan</span>
+                    <img id="gambar-buket" alt="" class="tersembunyi">
+                    <!-- canvas mini buat nampilin buket hasil rakitan -->
+                    <div class="mini-canvas tersembunyi" id="mini-canvas">
+                        <img id="wrap-belakang-r" alt="">
+                        <div id="tangkai-bunga-r"></div>
+                        <img id="wrap-depan-r" alt="">
+                    </div>
+                    <!-- nama pengirim -->
+                    <p id="dari-pengirim"></p>
+                </div>
+                <div class="flip-card-back">
+                    <!-- isi pesan kartu ucapan -->
+                    <p id="isi-pesan"></p>
+                </div>
+            </div>
+        </section>
+        <!-- tombol balik ke halaman utama buat bikin buket sendiri -->
+        <a href="../index.html" id="btn-buat-sendiri">Make Your Own</a>
+        <!-- gambar hiasan kiri kanan -->
+        <img src="https://i.ibb.co.com/vvcX8KpF/Untitled352-20260829111636.png" class="kiri">
+        <img src="https://i.ibb.co.com/QvjMxd07/Untitled352-20260829111755.png" class="kanan">
+    </main>
+
+    <script src="../js/receiver.js"></script>
+</body>
+
+</html>

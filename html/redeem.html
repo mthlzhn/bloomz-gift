@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://i.ibb.co.com/nNfMqxM2/Untitled350-20260828110618.png">
+    <!-- css khusus halaman redeem -->
+    <link rel="stylesheet" href="../css/redeem.css">
+    <title>redeem - Bloomz Gift</title>
+</head>
+
+<body>
+    <main>
+        <!-- form isi data pengiriman setelah redeem token -->
+        <form id="form-redeem">
+            <h2>Lengkapi Data Pengiriman</h2>
+            <!-- input nama penerima -->
+            <label for="input-nama">Nama Penerima</label>
+            <input type="text" id="input-nama" name="nama" placeholder="Nama Lengkap" required>
+
+            <!-- input nomor telepon -->
+            <label for="input-telepon">Nomor Telepon Pengirim</label>
+            <input type="tel" id="input-telepon" name="telepon" placeholder="Nomor Telepon" required>
+
+            <!-- input alamat penerima -->
+            <label for="input-alamat">Alamat Penerima</label>
+            <textarea id="input-alamat" name="alamat" placeholder="Alamat Saat Ini" required></textarea>
+
+            <!-- catatan tambahan, boleh kosong -->
+            <label for="input-catatan">Catatan (opsional)</label>
+            <textarea id="input-catatan" name="catatan" placeholder="Pesan untuk Bloomz Gift"></textarea>
+
+            <!-- tombol kirim form -->
+            <button type="submit">Kirim</button>
+        </form>
+    </main>
+    <script src="../js/redeem.js"></script>
+</body>
+
+</html>

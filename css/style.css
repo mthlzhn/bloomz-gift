@@ -1,0 +1,350 @@
+* {
+    font-family: "Google Sans", sans-serif;
+}
+
+body {
+    /* warna dasar halaman, putih agak krem */
+    background-color: #fff9f7;
+    /* teks di halaman gak bisa diblok/diselect */
+    user-select: none;
+}
+
+/* gaya dasar link */
+a {
+    text-decoration: none;
+    padding: 5px;
+    margin: 20px;
+    color: #17233c;
+    /* border transparan dulu, biar gak geser pas ditambah border warna */
+    border: 2px solid transparent;
+}
+
+/* ukuran default gambar di dalam section */
+section img {
+    width: 190px;
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+header {
+    /* nempel di atas pas discroll */
+    position: sticky;
+    top: 0;
+    height: 25px;
+    padding: 13px;
+    text-align: center;
+    color: #17233c;
+    background-color: white;
+    /* bayangan tipis di bawah header */
+    box-shadow: 1px 1px 5px 1px #17233c32;
+    /* biar tampil di atas konten lain pas discroll */
+    z-index: 100;
+}
+
+/* logo di header */
+header img {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 30px;
+}
+
+/* teks kecil di sebelah logo, kemungkinan nama toko */
+header p {
+    position: absolute;
+    top: 3px;
+    left: 60px;
+    color: #da86a2;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* efek pas link nav disorot atau difokus */
+nav a:hover,
+nav a:focus {
+    padding: 5px;
+}
+
+/* garis bawah penanda halaman aktif, khusus menu home */
+.home {
+    border-bottom: 3px solid #f8c8d8;
+}
+
+/* tombol hamburger, default disembunyikan di layar besar */
+#btn-hamburger {
+    display: none;
+    /* tersembunyi di desktop */
+    position: absolute;
+    top: 8px;
+    right: 15px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    z-index: 101;
+    color: #da86a2;
+}
+
+/* footer */
+footer {
+    padding: 20px;
+    text-align: center;
+    background-color: #17233c;
+    color: gray;
+}
+
+/* logo di footer */
+footer img {
+    width: 40px;
+}
+
+footer h3 {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: lighter;
+}
+
+/* link kontak di footer */
+footer a {
+    color: gray;
+    margin: 0;
+}
+
+/* bagian hero, tampilan awal landing page */
+.hero {
+    /* tinggi penuh satu layar */
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /* gambar background hero */
+    background-image: url('https://i.ibb.co.com/5hn0sZ4K/Untitled346-20260825202938.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 0 15px;
+    /* tambahan: jaga jarak dari tepi layar sempit */
+    box-sizing: border-box;
+}
+
+/* judul utama di hero */
+.hero-content h1 {
+    margin: 0 20px;
+    font-family: "Niconne", sans-serif;
+    /* ukuran font menyesuaikan lebar layar, ada batas min dan max */
+    font-size: clamp(3.5rem, 9vw, 5rem);
+    font-weight: 500;
+    text-align: center;
+    color: white;
+    /* bayangan teks biar tetap kebaca di atas gambar background */
+    text-shadow: 1px 1px 5px 1px #17233ce3;
+}
+
+.hero-content p {
+    color: #17233c;
+}
+
+/* bagian review, strip berjalan */
+.reviews {
+    width: 100%;
+    /* gambar/teks yang keluar area disembunyikan, bukan bikin scrollbar */
+    overflow-x: hidden;
+    background-color: #fce4ec;
+    text-align: center;
+    color: #17233c;
+    border-top: 2px solid #da86a2;
+    border-bottom: 2px solid #da86a2;
+}
+
+/* wadah yang bergerak otomatis ke samping */
+.auto-scroll {
+    /* lebar mengikuti isi, bukan dibatasi parent */
+    width: max-content;
+    display: flex;
+    white-space: nowrap;
+    padding: 20px;
+    /* animasi geser jalan terus tanpa henti */
+    animation: scroll 25s linear infinite;
+}
+
+/* animasi geser dari posisi awal sampai setengah lebar total */
+@keyframes scroll {
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* satu set review, ada dua di html biar animasi keliatan nyambung terus */
+.review-container {
+    display: flex;
+    flex-wrap: nowrap;
+    /* gak ikut menyusut biar animasi geser tetap mulus */
+    flex-shrink: 0;
+    width: max-content;
+    gap: 50px;
+    padding: 10px;
+    padding-right: 40px;
+}
+
+/* satu kartu review */
+.review-card {
+    width: 350px;
+    padding: 10px;
+    padding-left: 20px;
+    padding-top: 0;
+    background-color: white;
+    border-radius: 10px;
+    /* box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.39); */
+    border: 2px solid #da86a2;
+}
+
+/* baris atas kartu, foto dan nama sejajar */
+.review-header {
+    display: flex;
+    gap: 10px;
+}
+
+/* foto profil di review */
+.review-img {
+    width: 32px;
+    height: 32px;
+    margin-top: 13px;
+    object-fit: cover;
+}
+
+/* teks komentar review */
+.review-comment {
+    margin-top: 5px;
+    font-size: 14px;
+    color: rgb(117, 116, 116);
+    /* teks tetap bisa bungkus normal walau parent white-space nowrap */
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+
+/* bagian feedback, form saran dari user */
+.feedback {
+    padding: 60px 20px;
+    text-align: center;
+    color: #17233c;
+    background-color: white;
+}
+
+.feedback p {
+    margin-bottom: 25px;
+    color: #4a5a7c;
+}
+
+/* form feedback */
+.feedback form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    /* biar gak kelebaran di layar besar */
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* input dan textarea di form feedback */
+.feedback input,
+.feedback textarea {
+    padding: 12px;
+    border: 2px solid #17233c;
+    border-radius: 10px;
+    /* biar font ikutan sama, bukan default browser */
+    font-family: inherit;
+    font-size: 14px;
+    /* textarea cuma bisa diresize vertikal, gak melebar */
+    resize: vertical;
+}
+
+.feedback textarea {
+    min-height: 100px;
+}
+
+/* warna background berubah pas fokus atau disorot mouse */
+.feedback input:focus,
+.feedback textarea:focus,
+.feedback input:hover,
+.feedback textarea:hover {
+    background-color: #fff9f7;
+    outline: none;
+}
+
+.feedback button {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+/* gaya tombol umum, dipakai di beberapa tempat */
+.btn {
+    display: inline-block;
+    background-color: #17233c;
+    color: white;
+    padding: 12px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #4a5a7c;
+}
+
+/* tampilan buat layar tablet, di bawah 900px */
+@media (max-width: 900px) {
+    .review-card {
+        width: 280px;
+        /* sedikit lebih kecil, biar lebih banyak muat di layar sedang */
+    }
+}
+
+/* tampilan buat layar hp, di bawah 600px */
+@media (max-width: 600px) {
+
+    /* tombol hamburger dimunculin */
+    #btn-hamburger {
+        display: block;
+    }
+
+    /* garis bawah penanda halaman aktif dihilangin di mobile */
+    .home {
+        border: transparent;
+    }
+
+    /* menu nav default disembunyikan, jadi dropdown */
+    nav {
+        color: #17233c;
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.744);
+        flex-direction: column;
+        box-shadow: 1px 1px 5px 1px #17233c32;
+    }
+
+    /* muncul pas hamburger diklik */
+    nav.aktif {
+        display: flex;
+    }
+
+    nav a {
+        margin: 10px 20px;
+        text-align: center;
+    }
+
+    /* teks di hero diperkecil biar muat di layar sempit */
+    .hero-content p {
+        font-size: 14px;
+    }
+
+    /* kartu review lebih kecil lagi di hp */
+    .review-card {
+        width: 240px;
+    }
+
+    .review-comment {
+        font-size: 13px;
+    }
+}

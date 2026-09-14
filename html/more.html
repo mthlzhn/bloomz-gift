@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- preconnect ke google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- font niconne, biasanya buat teks dekoratif -->
+    <link href="https://fonts.googleapis.com/css2?family=Niconne&display=swap" rel="stylesheet">
+    <!-- font icon material symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="icon" href="https://i.ibb.co.com/nNfMqxM2/Untitled350-20260828110618.png">
+    <!-- css khusus halaman more -->
+    <link rel="stylesheet" href="../css/more.css">
+    <title>
+        <More>
+    </title>
+</head>
+
+<body>
+    <header>
+        <!-- logo toko -->
+        <img src="https://i.ibb.co.com/nNfMqxM2/Untitled350-20260828110618.png" alt="Bloomz Gift">
+        <!-- tombol hamburger buat menu di layar kecil -->
+        <button id="btn-hamburger" type="button">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+        <!-- menu navigasi utama -->
+        <nav id="nav-menu">
+            <a class="home" href="../index.html">Home</a>
+            <a class="catalog" href="../html/catalog.html">Catalog</a>
+            <a class="more" href="more.html">More</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- bagian about us, gambar dan deskripsi dari mockapi -->
+        <section class="about-section">
+            <img src="https://i.ibb.co.com/VWRY36wQ/Untitled348-20260831115734.png" alt="Bloomz Gift" class="about-img">
+            <div class="about-teks">
+                <h2>About Us</h2>
+                <p id="about-desc"></p>
+            </div>
+        </section>
+        <!-- bagian cara kerja, list dirender pake js -->
+        <section>
+            <h2>How it Works <span class="material-symbols-outlined">question_mark</span></h2>
+            <div id="cara-kerja"></div>
+        </section>
+        <!-- bagian faq, list dirender pake js -->
+        <section>
+            <h2>FAQ</h2>
+            <div id="faq-list"></div>
+        </section>
+    </main>
+
+    <footer>
+        <!-- logo di footer -->
+        <img src="https://i.ibb.co.com/nNfMqxM2/Untitled350-20260828110618.png" alt="Bloomz Gift">
+        <h3> Part of Zizii Shop</h3>
+        <!-- link kontak email -->
+        <a href="mailto:mthlzhn@gmail.com" title="Email"><span class="material-symbols-outlined">mail</span></a>
+        <!-- link instagram -->
+        <a href="https://www.instagram.com/mthlzhn" title="Instagram"><span
+                class="material-symbols-outlined">nest_protect</span></a>
+        <!-- link youtube -->
+        <a href="https://youtube.com/@mthlzhn" title="Youtube"><span
+                class="material-symbols-outlined">smart_display</span></a>
+        <br> <br>
+        <small>&copy; 2026 Bloomz Gift. All rights reserved.</small>
+    </footer>
+
+    <script src="../js/more.js"></script>
+</body>
+
+</html>

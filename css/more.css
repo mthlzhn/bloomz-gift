@@ -1,0 +1,299 @@
+/* reset dasar, semua elemen pakai font yang sama */
+* {
+    font-family: "Google Sans", sans-serif;
+}
+
+body {
+    /* warna dasar halaman, putih agak krem */
+    background-color: #fff9f7;
+    /* boleh discroll */
+    overflow: scroll;
+    /* teks di halaman gak bisa diblok/diselect */
+    user-select: none;
+}
+
+/* ukuran default gambar di dalam section */
+section img {
+    width: 190px;
+    border-radius: 10px;
+}
+
+/* gaya dasar link */
+a {
+    text-decoration: none;
+    padding: 5px;
+    margin: 20px;
+    color: #17233c;
+    /* border transparan dulu, biar gak geser pas ditambah border warna */
+    border: 2px solid transparent;
+}
+
+header {
+    /* nempel di atas pas discroll */
+    position: sticky;
+    top: 0;
+    height: 25px;
+    padding: 13px;
+    text-align: center;
+    color: #17233c;
+    background-color: white;
+    /* bayangan tipis di bawah header */
+    box-shadow: 1px 1px 5px 1px #17233c32;
+    /* biar tampil di atas konten lain pas discroll */
+    z-index: 100;
+}
+
+/* logo di header */
+header img {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 30px;
+}
+
+/* tombol hamburger, default disembunyikan di layar besar */
+#btn-hamburger {
+    display: none;
+    position: absolute;
+    top: 8px;
+    right: 15px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    z-index: 101;
+    color: #da86a2;
+}
+
+/* efek pas link nav disorot atau difokus */
+nav a:hover,
+nav a:focus {
+    padding: 5px;
+}
+
+/* garis bawah penanda halaman aktif, khusus menu more */
+.more {
+    border-bottom: 3px solid #f8c8d8;
+}
+
+/* konten utama */
+main {
+    /* dibatasi lebar biar gak terlalu lebar di layar besar */
+    max-width: 900px;
+    /* ditengahin horizontal */
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+/* jarak antar section */
+main section {
+    margin-bottom: 50px;
+}
+
+main h2 {
+    color: #17233c;
+    margin-bottom: 15px;
+}
+
+/* bagian about us */
+.about-section {
+    /* gambar dan teks sejajar */
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.about-img {
+    width: 220px;
+    height: 220px;
+    /* gambar dipotong biar pas kotak, gak gepeng */
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 1px 1px 10px 2px rgba(23, 35, 60, 0.15);
+    /* ukuran gambar gak ikut menyusut pas ruang sempit */
+    flex-shrink: 0;
+}
+
+.about-teks {
+    /* ngambil sisa ruang di sebelah gambar */
+    flex: 1;
+}
+
+.about-teks p {
+    color: #4a5a7c;
+    line-height: 1.7;
+}
+
+/* bagian how it works, bungkus semua langkah */
+#cara-kerja {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px 1px rgba(23, 35, 60, 0.1);
+    /* biar border-radius container motong sudut item pertama/terakhir */
+    overflow: hidden;
+}
+
+/* tiap baris langkah, icon dan teks sejajar */
+#cara-kerja p {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 20px;
+    color: #17233c;
+    margin: 0;
+}
+
+/* item terakhir gak perlu garis bawah */
+#cara-kerja p:last-child {
+    border-bottom: none;
+}
+
+/* icon material symbols di tiap langkah */
+#cara-kerja .material-symbols-outlined {
+    color: #da86a2;
+    font-size: 28px;
+    /* icon gak ikut menyusut pas teks panjang */
+    flex-shrink: 0;
+}
+
+/* bagian faq, list pertanyaan */
+#faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* tiap pertanyaan pakai elemen details, bisa dibuka tutup */
+#faq-list details {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px 20px;
+    box-shadow: 1px 1px 5px 1px rgba(23, 35, 60, 0.1);
+    /* border transparan dulu, biar gak geser pas dibuka nambah warna */
+    border: 2px solid transparent;
+}
+
+/* border jadi pink pas lagi dibuka */
+#faq-list details[open] {
+    border-color: #f8c8d8;
+}
+
+/* teks pertanyaan yang bisa diklik */
+#faq-list summary {
+    color: #17233c;
+    font-weight: 600;
+    cursor: pointer;
+    /* hilangkan panah default browser, biar konsisten tiap browser */
+    list-style: none;
+}
+
+/* hilangkan panah default khusus chrome/safari */
+#faq-list summary::-webkit-details-marker {
+    display: none;
+}
+
+/* tanda plus custom sebelum teks pertanyaan */
+#faq-list summary::before {
+    content: "+";
+    display: inline-block;
+    width: 20px;
+    color: #da86a2;
+    font-weight: 700;
+}
+
+/* tanda berubah jadi minus pas lagi dibuka */
+#faq-list details[open] summary::before {
+    content: "–";
+}
+
+/* teks jawaban di dalam faq */
+#faq-list p {
+    color: #4a5a7c;
+    margin-top: 10px;
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
+/* footer */
+footer {
+    padding: 20px;
+    text-align: center;
+    background-color: #17233c;
+    color: gray;
+}
+
+/* logo di footer */
+footer img {
+    width: 40px;
+}
+
+footer h3 {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: lighter;
+}
+
+/* link kontak di footer */
+footer a {
+    color: gray;
+    margin: 0;
+}
+
+/* tampilan buat layar tablet, di bawah 900px */
+@media (max-width: 900px) {
+    main {
+        padding: 20px 15px;
+    }
+}
+
+/* tampilan buat layar hp, di bawah 600px */
+@media (max-width: 600px) {
+    /* tombol hamburger dimunculin */
+    #btn-hamburger {
+        display: block;
+    }
+
+    /* garis bawah penanda halaman aktif dihilangin di mobile */
+    .more{
+        border: transparent;
+    }
+
+    /* menu nav default disembunyikan, jadi dropdown */
+    nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.744);
+        flex-direction: column;
+        box-shadow: 1px 1px 5px 1px #17233c32;
+    }
+
+    /* muncul pas hamburger diklik */
+    nav.aktif {
+        display: flex;
+    }
+
+    nav a {
+        margin: 10px 20px;
+        text-align: center;
+    }
+
+    /* about us jadi tumpuk ke bawah, bukan sejajar */
+    .about-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-img {
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+    }
+
+    /* teks langkah how it works diperkecil biar muat */
+    #cara-kerja p {
+        font-size: 14px;
+    }
+}

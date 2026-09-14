@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- preconnect ke google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- font icon material symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <!-- font fraunces buat teks/heading -->
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://i.ibb.co.com/nNfMqxM2/Untitled350-20260828110618.png">
+    <!-- css khusus halaman create -->
+    <link rel="stylesheet" href="../css/create.css">
+    <title>Create-Bouquet</title>
+</head>
+
+<body>
+    <!-- popup buat share buket rakitan, disembunyikan lewat css default -->
+    <div class="popup-overlay" id="popup-overlay-buket">
+        <div class="popup-box">
+            <div class="popup-header">
+                <!-- tombol salin link buket -->
+                <button type="button" id="btn-salin-link-buket" title="Salin link">
+                    <span class="material-symbols-outlined">link</span>
+                </button>
+                <!-- tombol tutup popup -->
+                <button type="button" id="btn-tutup-popup-buket">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <div class="popup-konten">
+                <h2>Bagikan Buket ini</h2>
+
+                <!-- input nama pengirim -->
+                <label for="popup-pengirim-buket">From</label>
+                <input type="text" id="popup-pengirim-buket" placeholder="Nama Pengirim">
+
+                <!-- textarea pesan ucapan -->
+                <label for="popup-pesan-buket">Kartu Ucapan</label>
+                <textarea id="popup-pesan-buket" placeholder="Tulis pesan disini.."></textarea>
+
+                <!-- bagian token opsional -->
+                <details class="popup-token-row">
+                    <summary>Punya token? (opsional)</summary>
+                    <label for="popup-token">Masukkan token</label>
+                    <input type="text" id="popup-token" placeholder="Masukkan token">
+                    <button type="button" id="btn-redeem-token">Redeem</button>
+                </details>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <div id="container">
+            <!-- area utama tempat buket dirakit -->
+            <div class="canvas-buket">
+                <!-- tombol undo buat batalin tangkai terakhir -->
+                <button id="btn-undo" type="button"><span class="material-symbols-outlined">undo</span></button>
+                <!-- penghitung jumlah tangkai yang udah dipasang -->
+                <span id="hitung-tangkai">0/9</span>
+                <!-- lapisan wrap belakang, di bawah tangkai bunga -->
+                <img id="wrap-belakang">
+                <!-- tempat tangkai bunga ditaruh -->
+                <div id="tangkai-bunga"></div>
+                <!-- lapisan wrap depan, nutupin bagian bawah tangkai -->
+                <img id="wrap-depan">
+            </div>
+            <!-- pilihan tangkai dan wrap buat dipilih user -->
+            <div class="opsi-buket">
+                <div id="pilih-tangkai"></div>
+                <div id="pilih-wrap"></div>
+            </div>
+
+            <div id="sidebar">
+                <!-- gambar panduan cara pakai -->
+                <div id="hint">
+                    <img src="https://i.ibb.co.com/C5LpqZjy/Untitled350-20260829235447.png" alt="hint">
+                </div>
+                <!-- navigasi balik ke catalog atau lanjut -->
+                <div id="nav-buket">
+                    <a href="../html/catalog.html">Back</a>
+                    <button id="btn-next">Next</button>
+                </div>
+                <!-- tombol buka panel pilih wrap -->
+                <button id="btn-wrap"><img src="https://i.ibb.co.com/QFvpPLXj/Untitled350-20260828094038.png"
+                        alt="wrap"></button>
+                <!-- tombol buka panel pilih tangkai -->
+                <button id="btn-tangkai"><img src="https://i.ibb.co.com/hR70rfQ9/Untitled350-20260828093911.png"
+                        alt=""></button>
+            </div>
+        </div>
+    </main>
+    <!-- script khusus halaman create -->
+    <script src="../js/create.js"></script>
+</body>
+
+</html>

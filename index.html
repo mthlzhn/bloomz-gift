@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- preconnect ke google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- font niconne buat teks dekoratif -->
+    <link href="https://fonts.googleapis.com/css2?family=Niconne&display=swap" rel="stylesheet">
+    <!-- font icon material symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="icon" href="https://i.ibb.co.com/nNfMqxM2/Untitled350-20260828110618.png"> 
+    <!-- css halaman utama, ini file ada di root jadi path-nya gak pake ../ -->
+    <link rel="stylesheet" href="css/style.css">
+    <title>Home-Page</title>
+</head>
+
+<body>
+    <header>
+        <!-- logo toko -->
+        <img src="https://i.ibb.co.com/nNfMqxM2/Untitled350-20260828110618.png" alt="Bloomz Gift">
+        <!-- tombol hamburger buat menu di layar kecil -->
+        <button id="btn-hamburger" type="button">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+        <!-- menu navigasi utama -->
+        <nav id="nav-menu">
+            <a class="home" href="index.html">Home</a>
+            <a class="catalog" href="html/catalog.html">Catalog</a>
+            <a class="more" href="html/more.html">More</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- bagian hero, ajakan utama buat mulai -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Send a Bloom, Keep a Memory</h1>
+                <p>Create a little something special, or redeem your Bloomz token for a real bouquet.</p>
+                <a href="html/catalog.html" class="btn">Get Started</a>
+            </div>
+        </section>
+        <!-- bagian review komentar, isinya diisi lewat js -->
+        <section class="reviews">
+            <h2>Words from Them</h2>
+            <div class="auto-scroll">
+                <div class="review-container"></div>
+                <div class="review-container"></div>
+            </div>
+        </section>
+        <!-- form feedback, kirim langsung ke formspree -->
+        <section class="feedback">
+            <h2>Ada Masukan?</h2>
+            <p>Ceritain pengalaman kamu pakai Bloomz Gift, kami baca semuanya.</p>
+            <form action="https://formspree.io/f/mwlkvjrj" method="POST">
+                <input type="email" name="Email" placeholder="Email kamu" required>
+                <textarea name="Masukan" placeholder="Tulis masukan kamu disini.." required></textarea>
+                <button type="submit" class="btn">Kirim Masukan</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <!-- logo di footer -->
+        <img src="https://i.ibb.co.com/nNfMqxM2/Untitled350-20260828110618.png" alt="Bloomz Gift">
+        <h3> Part of Zizii Shop</h3>
+        <!-- link kontak email -->
+        <a href="mailto:mthlzhn@gmail.com" title="Email"><span class="material-symbols-outlined">mail</span></a>
+        <!-- link instagram -->
+        <a href="https://www.instagram.com/mthlzhn" title="Instagram"><span
+                class="material-symbols-outlined">nest_protect</span></a>
+        <!-- link youtube -->
+        <a href="https://youtube.com/@mthlzhn" title="Youtube"><span
+                class="material-symbols-outlined">smart_display</span></a>
+        <br> <br>
+        <small>&copy; 2026 Bloomz Gift. All rights reserved.</small>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

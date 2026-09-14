@@ -1,0 +1,484 @@
+/* semua elemen pakai font yang sama, default ke sans-serif kalau font utama gagal load */
+* {
+    font-family: "Google Sans", sans-serif;
+}
+
+body {
+    overflow: scroll; /* biar muncul scrollbar meski tampilan cuma dikit, biar layout ga geser */
+    user-select: none; /* teks di halaman gak bisa diselect */
+}
+
+main {
+    position: relative; /* jadi acuan posisi untuk elemen anak yang pakai position: absolute */
+}
+
+/* style dasar untuk semua tag a (link) di halaman */
+a {
+    text-decoration: none; /* hilangin garis bawah bawaan link */
+    padding: 5px;
+    margin: 20px;
+    color: #17233c; /* warna teks navy */
+    border: 2px solid transparent; /* border transparan disiapin biar pas hover gak geser layout */
+}
+
+/* efek pas link di dalam nav di-hover atau kena fokus */
+nav a:hover {
+    padding: 5px;
+}
+
+/* garis bawah buat bagian catalog, manual */
+.catalog {
+    border-bottom: 3px solid #f8c8d8;
+}
+
+/* bagian header, isinya logo, judul, dan tombol hamburger */
+
+/* div yg di dalam header dibikin sticky biar nempel di atas pas discroll */
+header div {
+    position: sticky; /*sticky nyampe search dan kategori aja*/
+    top: 0;
+    height: 25px;
+    padding: 13px;
+    text-align: center;
+    color: #17233c;
+    background-color: white;
+    box-shadow: 1px 1px 5px 1px #17233c32; /* bayangan tipis di bawah header */
+    z-index: 100; /* biar header selalu di atas elemen lain */
+}
+
+/* posisi logo di header, ditempel pakai absolute */
+header img {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 30px;
+}
+
+/* posisi tulisan nama brand di sebelah logo */
+header p {
+    position: absolute;
+    top: 3px;
+    left: 60px;
+    color: #da86a2;
+    font-family: 'Times New Roman', Times, serif; /* font khusus buat brand, beda dari font utama */
+}
+
+/* tombol hamburger buat versi mobile, defaultnya disembunyikan dulu */
+#btn-hamburger {
+    display: none; /* baru dimunculkan lagi di media query mobile nanti*/
+    position: absolute;
+    top: 8px;
+    right: 15px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    z-index: 101; /* lebih tinggi dari header div biar tetap bisa diklik */
+    color: #da86a2;
+}
+
+/* bagian kotak pencarian buket >>*/
+/* bungkus form pencarian, dibikin flex biar input dan tombol sejajar */
+#form-cari {
+    margin: 15px auto;
+    max-width: 700px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* jarak antara input dan tombol cari */
+}
+
+/* input tempat user ngetik kata kunci pencarian */
+#cari-buket {
+    border: 2px solid #17233c;
+    height: 30px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 15px;
+    box-sizing: border-box; /* padding gak nambahin lebar total elemen */
+}
+
+/* ganti warna background input pas lagi difokus atau dihover */
+#cari-buket:focus,
+#cari-buket:hover {
+    background-color: #fff9f7;
+}
+
+/* tombol cari di dalam elemen search */
+search button {
+    border: 2px solid #17233c;
+    color: white;
+    background-color: #17233c;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+/* warna tombol cari berubah pas dihover */
+search button:hover {
+    background-color: #4a5a7c;
+}
+
+/* bagian tombol filter situasi (misal: semangat, ulang tahun, dll) */
+
+/* bungkus semua tombol filter, dibikin flex biar rapi dan bisa wrap ke bawah */
+#btn-situasi {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* kalau tombolnya banyak, otomatis turun ke baris baru */
+    gap: 10px;
+}
+
+/* style tiap tombol filter situasi */
+#btn-situasi button {
+    background-color: #fce4ec;
+    padding: 5px 15px;
+    border: 2px solid #f8c8d8;
+    border-radius: 20px; /* biar bentuknya oval */
+    margin-bottom: 20px;
+}
+
+/* border tombol berubah warna pas dihover, jadi kelihatan aktif */
+#btn-situasi button:hover {
+    border: 2px solid #17233c;
+}
+
+/* bagian grid kartu buket (hasil dari data buket yang di-fetch) */
+/* bungkus semua kartu buket, pakai flex wrap biar responsif otomatis */
+#container-buket {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* satu kartu buket */
+.card {
+    padding: 10px;
+    margin: 20px;
+    width: 200px;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px 1px #17233c77;
+    background-color: #fff9f7;
+    transition: transform 0.2s; /* biar animasi hover-nya halus, gak langsung loncat */
+    border: 4px double #da86a2;
+}
+
+/* efek pas kartu dihover: sedikit membesar dan naik ke atas */
+.card:hover {
+    transform: scale(1.01) translateY(-10px);
+    border: 4px double #17233c;
+}
+
+/* gambar buket di dalam kartu */
+.card-img {
+    height: 190px;
+    border-radius: 10px;
+    box-shadow: inset 1px 1px 3px 2px #f8c8d8; /* bayangan ke dalam biar kesan gambar agak "masuk" ke kartu */
+    padding: 0 25px;
+    margin: 2px;
+    background-color: white;
+}
+
+/* ikon favorite (hati) warnanya merah */
+.favorite {
+    color: red;
+}
+
+/* efek pas ikon favorite dihover: kursor jadi pointer dan ikon membesar */
+.favorite:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    /* pengaturan ini khusus buat font material symbols, biar ikonnya keisi penuh (filled) pas dihover */
+    font-variation-settings:
+        'FILL' 1,
+        'wght' 200,
+        'GRAD' 0,
+        'opsz' 40
+}
+
+/* bagian footer, ada di paling bawah halaman */
+
+footer {
+    padding: 20px;
+    text-align: center;
+    background-color: #17233c; /* warna gelap biar kontras sama isi halaman */
+    color: gray;
+}
+
+/* logo kecil di footer */
+footer img {
+    width: 40px;
+}
+
+/* judul di footer pakai font serif biar beda gaya dari body */
+footer h3 {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: lighter;
+}
+
+/* link di footer warnanya abu-abu, gak pakai margin gede kayak link biasa */
+footer a {
+    color: gray;
+    margin: 0;
+}
+
+/* bagian tombol tambah (floating) buat bikin buket custom */
+
+/* isi tulisan/ikon di dalam tombol add, warnanya putih */
+.add-buket {
+    color: white;
+    text-decoration: none;
+}
+
+/* tombol bulat yang selalu nempel di pojok kanan bawah layar */
+.add {
+    position: fixed; /* fixed biar tombolnya tetap di tempat walau discroll */
+    bottom: 60px;
+    right: 30px;
+    background-color: #f8c8d8;
+    padding: 15px;
+    border-radius: 50px; /* radius gede biar bentuknya bulat penuh */
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+}
+
+/* efek tombol add pas dihover */
+.add:hover {
+    color: #da86a2;
+    transform: scale(1.1);
+}
+
+/* bagian popup kartu ucapan (buat share buket lewat link) */
+/* lapisan gelap transparan yang nutupin seluruh layar pas popup muncul */
+.popup-overlay {
+    display: none; /* defaultnya nyembunyiin popup */
+    position: fixed;
+    inset: 0; /* nutupin seluruh sisi layar (top, right, bottom, left = 0) */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 200; /* paling atas dari semua elemen lain */
+    align-items: center;
+    justify-content: center;
+}
+
+/* class ini ditambahin lewat javascript pas popup mau dimunculkan */
+.popup-overlay.aktif {
+    display: flex;
+}
+
+/* kotak putih tempat isi popup */
+.popup-box {
+    background-color: white;
+    border-radius: 10px;
+    padding: 0;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    box-sizing: border-box;
+    border: 2px solid #da86a2;
+    overflow: hidden; /* biar sudut header pink gak keluar dari radius kotak */
+}
+
+/* strip pink di atas popup, isinya tombol salin link dan tombol tutup */
+.popup-header {
+    background-color: #f8c8d8;
+    padding: 5px 15px;
+    display: flex;
+    justify-content: flex-end; /* tombol-tombolnya nempel ke kanan */
+    align-items: center;
+    gap: 10px;
+    border-bottom: 2px solid #da86a2;
+}
+
+/* style sama buat tombol salin link dan tombol tutup popup, bentuknya kotak kecil */
+#btn-salin-link-buket, #btn-tutup-popup-buket {
+    border: 2px solid #da86a2;
+    border-radius: 6px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #da86a2;
+    background-color: #fce4ec;
+}
+
+/* warna teks tombol jadi putih pas dihover */
+#btn-salin-link-buket:hover, #btn-tutup-popup-buket:hover {
+    color: white;
+}
+
+/* padding buat isi di dalam popup (form pesan, dll) */
+.popup-konten {
+    padding: 20px;
+}
+
+/* label di atas tiap input/textarea */
+.popup-konten label {
+    display: block;
+    color: #17233c;
+    margin-top: 10px;
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+/* style input dan textarea di dalam popup */
+.popup-konten input,
+.popup-konten textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #17233c;
+    border-radius: 8px;
+    padding: 8px;
+    font-family: inherit; /* pakai font yang sama kayak elemen induknya, bukan font default browser */
+}
+
+/* background input/textarea berubah pas difokus atau dihover */
+.popup-konten input:focus,
+.popup-konten textarea:focus,
+.popup-konten input:hover,
+.popup-konten textarea:hover {
+    background-color: #fff9f7;
+}
+
+/* baris buat bagian token redeem, ada garis pemisah di atasnya */
+.popup-token-row {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #f8c8d8;
+}
+
+/* judul yang bisa diklik buat buka/tutup bagian token (elemen details/summary) */
+.popup-token-row summary {
+    color: #17233c;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* hilangin tanda panah/segitiga bawaan browser punya summary, khusus browser berbasis webkit */
+.popup-token-row summary::-webkit-details-marker {
+    display: none;
+}
+
+/* tombol redeem token di dalam popup */
+#btn-redeem-token {
+    background-color: #17233c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+    width: 100%;
+}
+
+/* warna tombol redeem berubah pas dihover */
+#btn-redeem-token:hover {
+    background-color: #4a5a7c;
+}
+
+/* tampilan buat layar tablet, lebar maksimal 900px */
+@media (max-width: 900px) {
+    /* form cari jadi mepet ke pinggir kiri-kanan biar pas di layar tablet */
+    #form-cari {
+        margin: 15px;
+        width: calc(100% - 30px);
+    }
+}
+
+/* tampilan buat layar hp, lebar maksimal 600px */
+@media (max-width: 600px) {
+    /* tombol hamburger baru dimunculkan di ukuran layar ini */
+    #btn-hamburger {
+        display: block;
+    }
+
+    /* garis bawah catalog dihilangin di mobile biar gak terlalu ramai */
+    .catalog {
+        border: transparent;
+    }
+
+    /* menu nav disembunyikan dulu, nanti muncul kalau hamburger diklik */
+    nav {
+        color: #17233c;
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.744);
+        flex-direction: column; /* menu jadi tersusun ke bawah, bukan ke samping */
+        box-shadow: 1px 1px 5px 1px #17233c32;
+    }
+
+    /* class ini ditambahin javascript pas hamburger diklik, buat munculin menu */
+    nav.aktif {
+        display: flex;
+    }
+
+    /* jarak dan perataan tiap link di dalam menu mobile */
+    nav a {
+        margin: 10px 20px;
+        text-align: center;
+    }
+
+    /* form cari mepet dikit ke kiri-kanan di layar hp */
+    #form-cari {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    /* grid kartu buket, pengaturan jaraknya dikecilin buat layar sempit */
+    #container-buket {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    /* ukuran kartu buket diperkecil biar muat beberapa kartu sebaris di hp */
+    .card {
+        width: 110px;
+        margin: 10px;
+    }
+
+    /* gambar di dalam kartu juga ikut diperkecil dan digeser dikit */
+    .card-img {
+        position: relative;
+        right: 5px;
+        bottom: 5px;
+        height: 110px;
+        padding: 0 16px;
+    }
+
+    /* judul dan deskripsi kartu pakai ukuran font paling kecil di mobile */
+    .card-title,
+    .card-desc {
+        margin: 0;
+        margin-bottom: 0;
+        font-size: x-small;
+    }
+
+    /* ikon favorite juga dikecilin di mobile */
+    .favorite {
+        font-size: small;
+    }
+
+    /* tombol add diperkecil dan posisinya digeser dikit di mobile */
+    .add {
+        bottom: 20px;
+        right: 15px;
+        padding: 12px;
+        font-size: 20px;
+    }
+
+    /* popup-popup ini dilebarin full di layar hp biar gampang dibaca */
+    #popup-pesan,
+    #popup-token,
+    #popup-pengirim {
+        width: 100%;
+    }
+}

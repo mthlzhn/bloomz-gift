@@ -1,0 +1,275 @@
+/* import font mynerve, dipake buat teks tulisan tangan */
+@import url('https://fonts.googleapis.com/css2?family=Mynerve&display=swap');
+
+* {
+    font-family: "Google Sans", sans-serif;
+    /* teks di halaman gak bisa diblok/diselect */
+    user-select: none;
+}
+
+body {
+    /* background gradasi bulat, pink ke putih krem */
+    background: radial-gradient(circle, #f8c8d8, #fff9f7 50%);
+    background-size: cover;
+    margin: 0;
+    /* halaman gak bisa discroll */
+    overflow: hidden;
+}
+
+h1 {
+    text-align: center;
+    color: #17233cda;
+}
+
+main {
+    /* tinggi penuh satu layar */
+    min-height: 100vh;
+    display: flex;
+    /* isi ditumpuk ke bawah */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    gap: 25px;
+}
+
+/* gambar hiasan kiri dan kanan */
+.kanan,
+.kiri {
+    position: absolute;
+    width: 200px;
+    z-index: 100;
+}
+
+.kanan {
+    right: 0;
+}
+
+.kiri {
+    left: 0;
+    bottom: 0;
+}
+
+/* kartu yang bisa dibalik */
+.flip-card {
+    width: 320px;
+    height: 450px;
+    /* biar efek 3d pas dibalik kelihatan */
+    perspective: 1000px;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /* animasi pas dibalik */
+    transition: transform 0.6s;
+    /* biar depan belakang tetap dianggap bidang 3d terpisah */
+    transform-style: preserve-3d;
+}
+
+/* pas class terbalik ditambah lewat js, kartu muter 180 derajat */
+.flip-card.terbalik .flip-card-inner {
+    transform: rotateY(-180deg);
+}
+
+/* sisi depan dan belakang kartu */
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* sisi belakang gak kelihatan pas lagi ngadep ke arah dalam */
+    backface-visibility: hidden;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px 2px rgba(23, 35, 60, 0.2);
+    background-color: white;
+    padding: 25px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 4px double #17233c;
+}
+
+.flip-card-front {
+    justify-content: flex-start;
+}
+
+.flip-card-back {
+    /* diputer duluan biar pas kartu dibalik, ini yang muncul menghadap depan */
+    transform: rotateY(180deg);
+    justify-content: center;
+}
+
+/* gambar buket biasa, kepake kalau bukan buket rakitan */
+#gambar-buket {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    /* dimiringin dikit biar kesan casual, kayak foto ditempel */
+    transform: rotate(-10deg);
+}
+
+#judul-buket {
+    color: #17233c;
+    margin: 0 0 5px 0;
+}
+
+/* nama pengirim */
+#dari-pengirim {
+    color: #17233c;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0;
+    /* font tulisan tangan biar kesan personal */
+    font-family: 'mynerve';
+}
+
+/* teks kecil penunjuk buat klik kartu */
+.petunjuk-klik {
+    /* nempel ke bawah karena margin-top auto */
+    margin-top: auto;
+    color: #f8c8d8;
+    font-size: 13px;
+    font-style: italic;
+}
+
+/* isi pesan kartu ucapan */
+#isi-pesan {
+    color: #17233ca7;
+    font-family: "Mynerve";
+    font-size: 18px;
+    line-height: 1.7;
+    /* baris baru dari textarea tetap kebaca */
+    white-space: pre-wrap;
+}
+
+/* tombol make your own */
+#btn-buat-sendiri {
+    background-color: #17233c;
+    color: white;
+    text-decoration: none;
+    padding: 12px 30px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+#btn-buat-sendiri:hover {
+    background-color: #4a5a7c;
+}
+
+/* kartu hias di belakang flip-card, buat efek tumpukan kartu */
+#card-hias {
+    position: absolute;
+    width: 320px;
+    height: 450px;
+}
+
+.card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 320px;
+    height: 450px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px 2px rgba(23, 35, 60, 0.2);
+}
+
+/* kartu pertama, dimiringin ke kiri */
+.card.satu {
+    transform: rotate(-8deg);
+    z-index: 1;
+    background-color: #4a5a7c;
+}
+
+/* kartu kedua, dimiringin ke kanan */
+.card.dua {
+    transform: rotate(6deg);
+    z-index: 1;
+    background-color: #f8c8d8;
+}
+
+/* canvas mini buat nampilin buket hasil rakitan */
+.mini-canvas {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+/* gambar wrap belakang dan depan di canvas mini */
+#wrap-belakang-r,
+#wrap-depan-r {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#wrap-belakang-r {
+    /* paling belakang, di bawah tangkai bunga */
+    z-index: 1;
+}
+
+#tangkai-bunga-r {
+    position: absolute;
+    inset: 0;
+    /* di antara wrap belakang dan wrap depan */
+    z-index: 2;
+}
+
+#wrap-depan-r {
+    /* paling depan, nutupin bagian bawah tangkai */
+    z-index: 3;
+    /* biar gak ganggu klik walau sebenernya di halaman ini gak ada interaksi klik tangkai */
+    pointer-events: none;
+}
+
+/* posisi tiap tangkai di canvas mini, diatur lewat js */
+.tangkai-di-buket {
+    position: absolute;
+    width: 25%;
+}
+
+/* class buat nyembunyiin elemen, dipakai bareng js */
+.tersembunyi {
+    display: none;
+}
+
+/* tampilan buat layar hp, di bawah 500px */
+@media (max-width: 500px) {
+
+    /* kartu dan hiasannya diperkecil biar muat di layar sempit */
+    .flip-card,
+    #card-hias,
+    .card {
+        width: 220px;
+        height: 320px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    #gambar-buket,
+    .mini-canvas {
+        height: 250px;
+    }
+
+    .kanan,
+    .kiri {
+        width: 140px;
+    }
+}

@@ -1,0 +1,540 @@
+/* reset dasar, semua elemen pakai font yang sama */
+* {
+    font-family: "Google Sans", sans-serif;
+}
+
+body {
+    /* warna dasar background, ada transparansi dikit */
+    background-color: #4a5a7c2c;
+    /* halaman gak bisa discroll */
+    overflow: hidden;
+    /* teks di halaman gak bisa diblok/diselect */
+    user-select: none;
+}
+
+/* tombol undo */
+#btn-undo {
+    /* jarak dalam tombol */
+    padding: 10px 20px;
+    /* hilangin border bawaan */
+    border: none;
+    /* sudut tombol dibulatin */
+    border-radius: 10px;
+    /* warna dasar tombol, navy tua */
+    background-color: #17233c;
+    /* warna teks/icon di dalam tombol */
+    color: white;
+    /* kursor jadi tangan pas hover */
+    cursor: pointer;
+    align-self: flex-start;
+    /* posisi ngambang di atas canvas */
+    position: absolute;
+    /* nempel di bawah */
+    bottom: 10px;
+    /* nempel di kanan */
+    right: 10px;
+    /* biar tampil di atas elemen lain */
+    z-index: 5;
+}
+
+/* warna tombol berubah pas disorot mouse */
+#btn-undo:hover {
+    background-color: #4a5a7c;
+}
+
+main {
+    /* canvas dan panel opsi disusun sejajar */
+    display: flex;
+    /* jarak antar canvas dan panel */
+    gap: 30px;
+    padding: 20px;
+    /* semua konten ditengahin */
+    justify-content: center;
+    /* rata atas, biar gak ikut stretch */
+    align-items: flex-start;
+}
+
+/* bungkus canvas dan panel pilihan jadi satu kotak */
+#container {
+    display: flex;
+    /* border luar warna pink */
+    border: 2px solid #da86a2;
+    border-radius: 10px;
+    /* jarak dalam kotak, kiri kanan lebih lebar */
+    padding: 35px 100px;
+    background-color: white;
+    position: relative;
+    /* override padding kanan biar beda dari kiri */
+    padding-right: 50px;
+}
+
+.canvas-buket {
+    /* jadi acuan posisi wrap dan tangkai bunga di dalamnya */
+    position: relative;
+    width: 400px;
+    /* rasio tinggi lebar tetap 3:4 */
+    aspect-ratio: 3 / 4;
+    /* warna dasar canvas, putih agak krem */
+    background-color: #fff9f7;
+    border: 2px solid #17233c;
+    border-radius: 10px;
+    /* garis putus-putus, pembatas ke panel opsi di sebelahnya */
+    border-right: 2px dashed #17233c;
+}
+
+/* gambar wrap belakang dan depan, dua-duanya nutup penuh canvas */
+#wrap-belakang,
+#wrap-depan {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* gambar gak kepotong, proporsinya tetap */
+    object-fit: contain;
+}
+
+#wrap-belakang {
+    /* paling belakang, di bawah tangkai bunga */
+    z-index: 1;
+}
+
+#wrap-depan {
+    /* paling depan, nutupin bagian bawah tangkai */
+    z-index: 3;
+    /* klik tetap tembus ke tangkai di bawahnya */
+    pointer-events: none;
+}
+
+#tangkai-bunga {
+    /* nutup penuh area canvas */
+    position: absolute;
+    inset: 0;
+    /* di antara wrap belakang dan wrap depan */
+    z-index: 2;
+}
+
+.tangkai-di-buket {
+    /* posisi tiap tangkai diatur lewat js pakai top/left */
+    position: absolute;
+    width: 25%;
+    /* titik acuan jadi tengah gambar, bukan pojok */
+    transform: translate(-50%, -50%);
+}
+
+/* label penghitung jumlah tangkai */
+#hitung-tangkai {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 4;
+    /* background putih semi transparan biar teks kebaca di atas gambar apapun */
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 4px 10px;
+    /* bentuk jadi pil/oval */
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* panel opsi, strip di samping kanan canvas */
+.opsi-buket {
+    width: 140px;
+    padding: 15px;
+    /* isi panel disusun ke bawah */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 2px solid #17233c;
+    /* garis titik-titik, pembatas ke canvas */
+    border-left: 2px dotted #17233c;
+    border-radius: 10px;
+    background-color: white;
+    /* biar tinggi panel gak berubah-ubah pas ganti isi */
+    min-height: 400px;
+}
+
+/* dua kotak pilihan, tangkai dan wrap, defaultnya disembunyikan */
+#pilih-tangkai,
+#pilih-wrap {
+    display: none;
+    /* isinya bisa turun ke baris baru kalau kepanjangan */
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* muncul kalau lagi aktif dipilih */
+#pilih-tangkai.aktif,
+#pilih-wrap.aktif {
+    display: flex;
+    border-color: pink;
+}
+
+/* thumbnail gambar tangkai dan wrap yang bisa diklik */
+.klik-tangkai,
+.klik-wrap {
+    width: 50px;
+    height: 110px;
+    /* gambar dipotong biar pas ukuran kotak */
+    object-fit: cover;
+    /* border transparan dulu, biar gak geser pas hover nambah border warna */
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.klik-wrap {
+    /* ukuran beda karena wrap bentuknya kotak, bukan panjang kayak tangkai */
+    width: 87px;
+    height: 87px;
+}
+
+/* efek hover, border jadi pink dan gambar sedikit membesar */
+.klik-tangkai:hover,
+.klik-wrap:hover {
+    border-color: pink;
+    transform: scale(1.05);
+}
+
+/* item yang gak bisa dipilih lagi, misal slot udah penuh */
+.klik-disabled {
+    opacity: 0.4;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+/* kumpulan tombol di sebelah kanan container */
+#sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* jarak dari panel opsi di sebelahnya */
+    margin-left: 40px;
+}
+
+/* baris tombol back dan next */
+#nav-buket {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+/* tombol next dan link back, disamain gayanya */
+#btn-next,
+#sidebar a {
+    box-sizing: border-box;
+    /* hilangin garis bawah link */
+    text-decoration: none;
+    border: 2px solid #17233c;
+    width: 60px;
+    padding: 10px 5px;
+    /* teks jadi kapital semua */
+    text-transform: uppercase;
+    border-radius: 10px;
+    background-color: #17233c;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+}
+
+#btn-next:hover,
+#sidebar a:hover {
+    background-color: #4a5a7c;
+}
+
+/* tombol buka panel wrap dan tangkai */
+#btn-wrap,
+#btn-tangkai {
+    border-radius: 10px;
+    border: 2px solid #da86a2;
+    background-color: #fce4ec;
+    width: 130px;
+    height: 130px;
+    padding: 10px;
+    /* icon ditengahin */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* icon di dalam tombol wrap dan tangkai */
+#btn-wrap img,
+#btn-tangkai img {
+    /* icon aslinya warna hitam, dibalik jadi putih */
+    filter: invert(1);
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#btn-wrap:hover,
+#btn-tangkai:hover {
+    background-color: #da86a24e;
+}
+
+/* bungkus gambar panduan/hint */
+#hint {
+    /* jadi acuan kalau ada elemen lain nempel di atasnya */
+    position: relative;
+}
+
+#hint img {
+    width: 170px;
+    top: 30px;
+    border-radius: 10px;
+}
+
+/* popup buat isi kartu ucapan, defaultnya tersembunyi */
+.popup-overlay {
+    display: none;
+    /* nutup seluruh layar */
+    position: fixed;
+    inset: 0;
+    /* layar belakang jadi gelap semi transparan */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 200;
+    /* popup box ditengahin */
+    align-items: center;
+    justify-content: center;
+}
+
+/* muncul kalau class aktif ditambahin lewat js */
+.popup-overlay.aktif {
+    display: flex;
+}
+
+/* kotak putih isi popup */
+.popup-box {
+    background-color: white;
+    border-radius: 10px;
+    padding: 0;
+    width: 90%;
+    /* biar gak kelebaran di layar besar */
+    max-width: 400px;
+    position: relative;
+    box-sizing: border-box;
+    border: 2px solid #da86a2;
+    /* outline navy, sesuai sketsa */
+    /* biar isi dalam gak keluar dari sudut yang dibulatin */
+    overflow: hidden;
+}
+
+/* header popup, tempat tombol salin link dan tutup */
+.popup-header {
+    background-color: #f8c8d8;
+    /* pink, sesuai label sketsa */
+    padding: 5px 15px;
+    display: flex;
+    /* tombol-tombol digeser ke kanan */
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 2px solid #da86a2;
+}
+
+/* tombol salin link dan tombol tutup popup */
+#btn-salin-link-buket,
+#btn-tutup-popup-buket {
+    border: 2px solid #da86a2;
+    border-radius: 6px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #da86a2;
+    background-color: #fce4ec;
+}
+
+/* warna icon berubah pas hover, tapi background belum diubah di sini */
+#btn-salin-link-buket:hover,
+#btn-tutup-popup-buket:hover {
+    color: white;
+}
+
+/* jarak dalam buat isi form popup */
+.popup-konten {
+    padding: 20px;
+}
+
+/* label tiap input di form popup */
+.popup-konten label {
+    display: block;
+    color: #17233c;
+    margin-top: 10px;
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+/* kotak input teks dan textarea di popup */
+.popup-konten input,
+.popup-konten textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #17233c;
+    border-radius: 8px;
+    padding: 8px;
+    /* biar font ikutan sama kayak elemen lain, bukan default browser */
+    font-family: inherit;
+}
+
+/* warna background input berubah pas fokus atau disorot mouse */
+.popup-konten input:focus,
+.popup-konten textarea:focus,
+.popup-konten input:hover,
+.popup-konten textarea:hover {
+    background-color: #fff9f7;
+}
+
+/* bagian token, dipisah pakai garis tipis di atasnya */
+.popup-token-row {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #f8c8d8;
+}
+
+/* teks judul di elemen details */
+.popup-token-row summary {
+    color: #17233c;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* hilangin ikon panah bawaan browser di summary */
+.popup-token-row summary::-webkit-details-marker {
+    display: none;
+}
+
+/* tombol redeem token */
+#btn-redeem-token {
+    background-color: #17233c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+    /* lebar penuh mengikuti kotak token */
+    width: 100%;
+}
+
+#btn-redeem-token:hover {
+    background-color: #4a5a7c;
+}
+
+/* tampilan buat layar tablet, lebar 601px sampai 950px */
+@media (max-width: 950px) {
+    body {
+        /* boleh discroll karena layar lebih sempit */
+        overflow: auto;
+    }
+
+    #container {
+        padding: 30px 40px;
+        gap: 0;
+    }
+
+    .canvas-buket {
+        width: 320px;
+        /* 0.8x dari 400px desktop */
+    }
+
+    .opsi-buket {
+        width: 125px;
+        /* dibatasi konten (.klik-wrap 87px + padding), gak bisa lebih kecil */
+        min-height: 300px;
+    }
+
+    #sidebar {
+        margin-left: 20px;
+        /* 0.5x dari 40px */
+    }
+
+    #btn-wrap,
+    #btn-tangkai {
+        width: 105px;
+        /* 0.8x dari 130px */
+        height: 105px;
+        padding: 8px;
+    }
+
+    #btn-next,
+    #sidebar a {
+        width: 48px;
+        /* 0.8x dari 60px */
+        padding: 8px 4px;
+    }
+
+    /* hint disembunyikan biar gak makan tempat di layar sempit */
+    #hint {
+        display: none;
+    }
+}
+
+/* tampilan buat layar lebih kecil lagi, di bawah 800px kayak hp */
+@media (max-width: 800px) {
+    body {
+        overflow: auto;
+    }
+
+    main {
+        padding: 15px;
+        align-items: center;
+    }
+
+    #container {
+        /* canvas dan panel opsi jadi ditumpuk ke bawah, bukan sejajar */
+        flex-direction: column;
+        align-items: center;
+        padding: 60px 20px 20px;
+        gap: 0;
+    }
+
+    .canvas-buket {
+        width: 100%;
+        max-width: 400px;
+        border: 2px solid #17233c;
+        /* garis putus-putus pindah ke bawah karena layout jadi vertikal */
+        border-bottom: 2px dashed #17233c;
+    }
+
+    .opsi-buket {
+        margin-bottom: 15px;
+        width: 100%;
+        max-width: 400px;
+        box-sizing: border-box;
+        border: 2px solid #17233c;
+        /* garis titik-titik pindah ke atas, nyambung sama canvas di atasnya */
+        border-top: 2px dotted #17233c;
+    }
+
+    /* tombol back dan next lepas dari sidebar, nempel di pojok atas container */
+    #nav-buket {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        width: auto;
+        justify-content: space-between;
+    }
+
+    #sidebar {
+        margin-left: 0;
+        /* tombol wrap dan tangkai jadi sebaris, bukan ke bawah */
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+
+    /* tombol wrap dan tangkai berbagi lebar yang sama */
+    #btn-wrap,
+    #btn-tangkai {
+        flex: 1;
+        min-width: 100px;
+    }
+
+}

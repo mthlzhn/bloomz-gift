@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- preconnect ke google fonts biar font kebuka lebih cepat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- import awal material symbols, versi simpel -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <!-- import kedua, ini yang bawa axis FILL biar icon bisa solid/outline -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="icon" href="https://i.ibb.co.com/nNfMqxM2/Untitled350-20260828110618.png">
+    <!-- path relatif ke folder css, sesuai posisi file ini di dalam folder html -->
+    <link rel="stylesheet" href="../css/catalog.css">
+    <title>Bouquet-Catalog</title>
+</head>
+
+<body>
+    <header>
+        <div>
+            <!-- logo toko -->
+            <img src="https://i.ibb.co.com/nNfMqxM2/Untitled350-20260828110618.png" alt="Bloomz Gift">
+            <!-- tombol hamburger buat menu di layar kecil -->
+            <button id="btn-hamburger" type="button">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <!-- menu navigasi utama -->
+            <nav id="nav-menu">
+                <a class="home" href="../index.html">Home</a>
+                <a class="catalog" href="catalog.html">Catalog</a>
+                <a class="more" href="../html/more.html">More</a>
+            </nav>
+        </div>
+        <!-- kotak pencarian buket -->
+        <search>
+            <form id="form-cari">
+                <input type="search" id="cari-buket" name="cari" placeholder="Cari Bunga">
+                <button type="submit"><span class="material-symbols-outlined">
+                        search
+                    </span></button>
+            </form>
+        </search>
+    </header>
+
+    <main>
+        <!-- tombol filter kategori buket -->
+        <div id="btn-situasi">
+            <button type="button">Semua</button>
+            <button type="button">Anniversary</button>
+            <button type="button">Ulang Tahun</button>
+            <button type="button">Semangat</button>
+            <button type="button">Selamat</button>
+        </div>
+        <!-- tempat kartu buket dirender pake js -->
+        <div id="container-buket"></div>
+        <!-- tombol buat ke halaman create buket -->
+        <div class="add-buket">
+            <a href="create.html">
+                <span class="material-symbols-outlined add">design_services</span>
+            </a>
+        </div>
+
+        <!-- popup share buket, disembunyikan lewat css default -->
+        <div class="popup-overlay" id="popup-overlay-buket">
+            <div class="popup-box">
+                <div class="popup-header">
+                    <!-- tombol salin link, id ini yang tadinya salah ketik -->
+                    <button type="button" id="btn-salin-link-buket" title="Salin link">
+                        <span class="material-symbols-outlined">link_2</span>
+                    </button>
+                    <!-- tombol tutup popup -->
+                    <button type="button" id="btn-tutup-popup-buket">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+
+                <div class="popup-konten">
+                    <h2>Bagikan Buket ini</h2>
+
+                    <!-- input nama pengirim -->
+                    <label for="popup-pengirim-buket">From</label>
+                    <input type="text" id="popup-pengirim-buket" placeholder="Nama Pengirim">
+
+                    <!-- textarea pesan kartu ucapan -->
+                    <label for="popup-pesan-buket">Kartu Ucapan</label>
+                    <textarea id="popup-pesan-buket" placeholder="Tulis pesan disini.."></textarea>
+
+                    <!-- bagian token, nyembunyi otomatis pake details/summary -->
+                    <details class="popup-token-row">
+                        <summary>Punya token? (opsional)</summary>
+                        <label for="popup-token">Masukkan token</label>
+                        <input type="text" id="popup-token" placeholder="Masukkan token">
+                        <button type="button" id="btn-redeem-token">Redeem</button>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <!-- logo di footer -->
+        <img src="https://i.ibb.co.com/nNfMqxM2/Untitled350-20260828110618.png" alt="Bloomz Gift">
+        <h3> Part of Zizii Shop</h3>
+        <!-- link kontak, pake mailto -->
+        <a href="mailto:mthlzhn@gmail.com" title="Email"><span class="material-symbols-outlined">mail</span></a>
+        <!-- link ig, icon nest_protect ini cuma icon pengganti bukan icon ig asli -->
+        <a href="https://www.instagram.com/mthlzhn" title="Instagram"><span
+                class="material-symbols-outlined">nest_protect</span></a>
+        <!-- link youtube -->
+        <a href="https://youtube.com/@mthlzhn" title="Youtube"><span
+                class="material-symbols-outlined">smart_display</span></a>
+        <br> <br>
+        <small>&copy; 2026 Bloomz Gift. All rights reserved.</small>
+    </footer>
+    <!-- script khusus halaman catalog -->
+    <script src="../js/catalog.js"></script>
+</body>
+
+</html>
